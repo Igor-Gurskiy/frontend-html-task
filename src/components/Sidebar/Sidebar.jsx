@@ -28,9 +28,8 @@ const MainContainer = styled.div`
   max-width: ${({ $isOpened }) => ($isOpened ? "200px" : "70px")};
   background-color: ${({ theme }) => theme.sidebar.default};
 
-  color: ${({ theme }) =>
-    theme.text.default};
-    transition: max-width 0.6s ease-in-out;
+  color: ${({ theme }) => theme.text.default};
+  transition: max-width 0.6s ease-in-out;
 `;
 
 const LogoContainer = styled.div`
@@ -46,13 +45,12 @@ const Logo = styled.img`
 `;
 
 const LogoText = styled.span`
-  color: ${({ theme }) =>
-    theme.text.logo};
+  color: ${({ theme }) => theme.text.logo};
   font-weight: bold;
   font-size: 20px;
   margin-inline-start: 10px;
-transition: opacity 0.2s ease-in-out;
-transition-delay: ${({ $isOpened }) => ($isOpened ? "0.6s" : "0s")};
+  transition: opacity 0.2s ease-in-out;
+  transition-delay: ${({ $isOpened }) => ($isOpened ? "0.6s" : "0s")};
   opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
 `;
 
@@ -66,13 +64,14 @@ const ToggleSidebar = styled.div`
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  
-  background-color: ${({ theme, $isOpened }) =>
 
-      $isOpened ? theme.button.active : theme.button.default};
-transition: transform 0.6s ease-in-out, right 0.6s ease-in-out;
-    ${({$isOpened}) => $isOpened && css`
-        transform: rotateZ(-180deg);
+  background-color: ${({ theme, $isOpened }) =>
+    $isOpened ? theme.button.active : theme.button.default};
+  transition: transform 0.6s ease-in-out, right 0.6s ease-in-out;
+  ${({ $isOpened }) =>
+    $isOpened &&
+    css`
+      transform: rotateZ(-180deg);
     `}
 `;
 
@@ -82,14 +81,14 @@ const NavContainer = styled.div`
   gap: 10px;
   width: 100%;
   & :hover {
-  background-color: ${({ theme }) => theme.sidebar.hover};
-  color: ${({ theme }) => theme.text.hover};
-}
+    background-color: ${({ theme }) => theme.sidebar.hover};
+    color: ${({ theme }) => theme.text.hover};
+  }
   & :active {
-  background-color: ${({ theme }) => theme.sidebar.active};
-  color: ${({ theme }) => theme.text.active};
-  };
-  `;
+    background-color: ${({ theme }) => theme.sidebar.active};
+    color: ${({ theme }) => theme.text.active};
+  }
+`;
 
 const NavItem = styled.div`
   display: flex;
@@ -99,12 +98,12 @@ const NavItem = styled.div`
   padding: 6px;
   border-radius: 5px;
   position: relative;
-  `;
+`;
 
 const NavText = styled.span`
-transition: opacity 0.2s ease-in-out;
-transition-delay: ${({ $isOpened }) => ($isOpened ? "0.6s" : "0s")};
-opacity: ${({$isOpened}) => ($isOpened ? '1' : '0')};
+  transition: opacity 0.2s ease-in-out;
+  transition-delay: ${({ $isOpened }) => ($isOpened ? "0.6s" : "0s")};
+  opacity: ${({ $isOpened }) => ($isOpened ? "1" : "0")};
 `;
 
 const Sidebar = (props) => {
@@ -120,31 +119,31 @@ const Sidebar = (props) => {
 
   return (
     <ThemeProvider theme={currentTheme}>
-    <MainContainer $isOpened={isOpened}>
-      <LogoContainer>
-        <Logo src={logo} alt="TensorFlow logo" />
-        <LogoText $isOpened={isOpened}>TensorFlow</LogoText>
-            <ToggleSidebar $isOpened={isOpened} onClick={toggleSidebar}>
-          <FontAwesomeIcon icon="angle-right" />
-        </ToggleSidebar>
-      </LogoContainer>
-      <NavContainer>
-        {routes.map((route) => (
-          <NavItem key={route.title}>
-            <FontAwesomeIcon icon={route.icon} />
-            <NavText $isOpened={isOpened}>{route.title}</NavText>
-          </NavItem>
-        ))}
-      </NavContainer>
-      <NavContainer style={{ marginTop: "auto" }}>
-        {bottomRoutes.map((route) => (
-          <NavItem key={route.title}>
-            <FontAwesomeIcon icon={route.icon} />
-            <NavText $isOpened={isOpened}>{route.title}</NavText>
-          </NavItem>
-        ))}
-      </NavContainer>
-    </MainContainer>
+      <MainContainer $isOpened={isOpened}>
+        <LogoContainer>
+          <Logo src={logo} alt="TensorFlow logo" />
+          <LogoText $isOpened={isOpened}>TensorFlow</LogoText>
+          <ToggleSidebar $isOpened={isOpened} onClick={toggleSidebar}>
+            <FontAwesomeIcon icon="angle-right" />
+          </ToggleSidebar>
+        </LogoContainer>
+        <NavContainer>
+          {routes.map((route) => (
+            <NavItem key={route.title}>
+              <FontAwesomeIcon icon={route.icon} />
+              <NavText $isOpened={isOpened}>{route.title}</NavText>
+            </NavItem>
+          ))}
+        </NavContainer>
+        <NavContainer style={{ marginTop: "auto" }}>
+          {bottomRoutes.map((route) => (
+            <NavItem key={route.title}>
+              <FontAwesomeIcon icon={route.icon} />
+              <NavText $isOpened={isOpened}>{route.title}</NavText>
+            </NavItem>
+          ))}
+        </NavContainer>
+      </MainContainer>
     </ThemeProvider>
   );
 };
